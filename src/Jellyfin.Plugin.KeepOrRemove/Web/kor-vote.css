@@ -29,11 +29,11 @@
 }
 
 .kor-vote-keep.kor-active {
-    border-color: #3ba55d;
-    color: #3ba55d;
+    border-color: var(--jf-palette-success-main, #66bb6a);
+    color: var(--jf-palette-success-main, #66bb6a);
 }
 
 .kor-vote-remove.kor-active {
-    border-color: #d83c3e;
-    color: #d83c3e;
+    border-color: var(--jf-palette-error-main, #c62828);
+    color: var(--jf-palette-error-main, #c62828);
 }
