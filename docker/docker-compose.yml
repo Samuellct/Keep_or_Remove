@@ -1,3 +1,8 @@
+# Explicit project name: without it Compose derives the name from this file's parent
+# directory ("docker"), which collides with the sibling JellyUX-Homepage compose file
+# (also .../docker/docker-compose.yml) and makes one `up` recreate the other's container.
+name: keeporremove
+
 services:
   jellyfin:
     image: jellyfin/jellyfin:10.11.11
