@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Keep or Remove</title>
+</head>
+<body>
+<div data-role="page" id="keepOrRemoveConfigPage" class="page type-interior pluginConfigurationPage fullWidthContent">
+    <div class="content-primary">
+
+        <div class="verticalSection">
+            <div class="sectionTitleContainer">
+                <h2 class="sectionTitle">Keep or Remove</h2>
+            </div>
+            <p class="fieldDescription">
+                Users vote keep or remove on movies and series. This page shows the aggregated
+                results. The plugin never changes the library - every decision stays manual.
+            </p>
+        </div>
+
+        <div id="korWarningBanner" class="verticalSection" style="display: none;">
+            <p id="korWarningText" class="fieldDescription" style="color: #d83c3e;"></p>
+        </div>
+
+        <div class="verticalSection">
+            <div class="inputContainer">
+                <label class="selectLabel" for="korSort">Sort by</label>
+                <select is="emby-select" id="korSort" class="emby-select">
+                    <option value="total">Total votes</option>
+                    <option value="keep">Keep votes</option>
+                    <option value="remove">Remove votes</option>
+                </select>
+            </div>
+            <div class="inputContainer">
+                <label class="selectLabel" for="korType">Media type</label>
+                <select is="emby-select" id="korType" class="emby-select">
+                    <option value="all">All</option>
+                    <option value="movie">Movies</option>
+                    <option value="series">Series</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="verticalSection">
+            <table class="detailTable" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th>Media</th>
+                        <th>Type</th>
+                        <th>Keep</th>
+                        <th>Remove</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="korResultsBody"></tbody>
+            </table>
+            <p id="korEmpty" class="fieldDescription" style="display: none;">No votes yet.</p>
+        </div>
+
+        <div class="verticalSection">
+            <button is="emby-button" type="button" id="korPurge" class="raised">
+                Purge orphan votes
+            </button>
+            <div class="fieldDescription">
+                Removes stored votes whose media no longer exists in the library.
+            </div>
+        </div>
+
+    </div>
+    <script src="/KeepOrRemove/config.js"></script>
+</div>
+</body>
+</html>

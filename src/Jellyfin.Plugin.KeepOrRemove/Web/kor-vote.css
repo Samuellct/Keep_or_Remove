@@ -1,0 +1,39 @@
+/* Keep or Remove - vote button styling. All classes prefixed kor-; colours from native Jellyfin vars. */
+
+.kor-vote {
+    display: inline-flex;
+    gap: 0.5em;
+    align-items: center;
+}
+
+.kor-vote-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    background: transparent;
+    border: 1px solid var(--primaryTextColor, currentColor);
+    border-radius: 999px;
+    color: var(--primaryTextColor, currentColor);
+    padding: 0.35em 0.9em;
+    cursor: pointer;
+    opacity: 0.75;
+}
+
+.kor-vote-button:hover {
+    opacity: 1;
+}
+
+.kor-vote-button.kor-active {
+    opacity: 1;
+    font-weight: 600;
+}
+
+.kor-vote-keep.kor-active {
+    border-color: #3ba55d;
+    color: #3ba55d;
+}
+
+.kor-vote-remove.kor-active {
+    border-color: #d83c3e;
+    color: #d83c3e;
+}

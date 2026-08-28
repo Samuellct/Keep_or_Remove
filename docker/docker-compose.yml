@@ -1,0 +1,15 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:10.11.11
+    container_name: keeporremove-test
+    environment:
+      - JELLYFIN_PublishedServerUrl=http://localhost:${JELLYFIN_PORT:-8098}
+    volumes:
+      - ./config:/config
+      - ./cache:/cache
+      - ./plugins:/config/plugins
+      - ${FILMS_PATH}:/media/films:ro
+      - ${SHOWS_PATH}:/media/shows:ro
+    ports:
+      - "${JELLYFIN_PORT:-8098}:8096"
+    restart: unless-stopped
