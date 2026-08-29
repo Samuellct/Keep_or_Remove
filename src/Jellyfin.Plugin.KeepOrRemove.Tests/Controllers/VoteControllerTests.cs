@@ -234,6 +234,16 @@ public sealed class VoteControllerTests
     }
 
     [Fact]
+    public void Wrap_WhenActionThrowsUnauthorizedAccessException_Returns503()
+    {
+        // An unreadable votes.json throws UnauthorizedAccessException (not an IOException); it must
+        // still map to a clean 503, per Synthèse section 16.
+        var result = InvokeWrap(BuildController(), () => throw new UnauthorizedAccessException());
+
+        Assert.Equal(StatusCodes.Status503ServiceUnavailable, Assert.IsType<StatusCodeResult>(result).StatusCode);
+    }
+
+    [Fact]
     public void Wrap_WhenActionSucceeds_ReturnsItsResult()
     {
         var expected = new OkResult();

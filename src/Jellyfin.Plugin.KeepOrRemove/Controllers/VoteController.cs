@@ -165,7 +165,7 @@ public class VoteController : ControllerBase
         {
             return action();
         }
-        catch (Exception ex) when (ex is IOException or InvalidOperationException)
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException)
         {
             _logger.LogError(ex, "[KeepOrRemove] Vote storage is unavailable.");
             return StatusCode(StatusCodes.Status503ServiceUnavailable);
