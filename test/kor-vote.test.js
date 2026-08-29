@@ -9,6 +9,8 @@ const {
     _escHtml,
     _activeKind,
     _nextVoteState,
+    _voteRequest,
+    _applyVoteState,
     _buildVoteContainer
 } = korVote;
 
@@ -144,20 +146,55 @@ describe('_buildVoteContainer', () => {
         expect(el.querySelectorAll('.kor-active')).toHaveLength(0);
     });
 
-    it('binds no click handler in this phase', () => {
+    it('sets aria-pressed to match the active button', () => {
+        const el = _buildVoteContainer('REMOVE');
+        expect(el.querySelector('.kor-vote-remove').getAttribute('aria-pressed')).toBe('true');
+        expect(el.querySelector('.kor-vote-keep').getAttribute('aria-pressed')).toBe('false');
+    });
+
+    it('_buildVoteContainer does not bind a click handler itself', () => {
         const el = _buildVoteContainer('KEEP');
-        // jsdom does not expose listeners directly; assert the buttons carry no inline handler and
-        // that the builder never references addEventListener (interaction lands in Phase 4).
+        // The builder only produces DOM; _bindVoteClicks (browser-only) attaches listeners.
         el.querySelectorAll('button').forEach((b) => expect(b.onclick).toBeNull());
     });
 });
 
-// The browser section (bootstrap / MutationObserver / _tick) must not run under jsdom: the module
+describe('_voteRequest', () => {
+    it('describes an upsert as a PUT with a body', () => {
+        expect(_voteRequest('t1', 'KEEP')).toEqual({ method: 'PUT', body: { itemId: 't1', vote: 'KEEP' } });
+        expect(_voteRequest('t1', 'REMOVE')).toEqual({ method: 'PUT', body: { itemId: 't1', vote: 'REMOVE' } });
+    });
+
+    it('describes a cancellation as a DELETE with a query param', () => {
+        expect(_voteRequest('t1', null)).toEqual({ method: 'DELETE', params: { itemId: 't1' } });
+    });
+});
+
+describe('_applyVoteState', () => {
+    it('moves kor-active and aria-pressed to match the given vote', () => {
+        const el = _buildVoteContainer('KEEP');
+
+        _applyVoteState(el, 'REMOVE');
+        expect(el.querySelector('.kor-vote-remove').classList.contains('kor-active')).toBe(true);
+        expect(el.querySelector('.kor-vote-remove').getAttribute('aria-pressed')).toBe('true');
+        expect(el.querySelector('.kor-vote-keep').classList.contains('kor-active')).toBe(false);
+        expect(el.querySelector('.kor-vote-keep').getAttribute('aria-pressed')).toBe('false');
+
+        _applyVoteState(el, null);
+        expect(el.querySelectorAll('.kor-active')).toHaveLength(0);
+        el.querySelectorAll('button').forEach((b) => expect(b.getAttribute('aria-pressed')).toBe('false'));
+    });
+});
+
+// The browser section (bootstrap / observer / click wiring) must not run under jsdom: the module
 // returns right after `module.exports`, so importing it has no side effects.
 describe('module import', () => {
     it('exports only the pure helpers and starts nothing', () => {
         expect(typeof korVote._isDetailPage).toBe('function');
         expect(korVote._bootstrap).toBeUndefined();
         expect(korVote._tick).toBeUndefined();
+        expect(korVote._bindVoteClicks).toBeUndefined();
+        expect(korVote._onVoteClick).toBeUndefined();
+        expect(korVote._sendVote).toBeUndefined();
     });
 });
