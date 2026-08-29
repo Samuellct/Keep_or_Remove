@@ -8,6 +8,7 @@ const {
     _voteTargetId,
     _escHtml,
     _activeKind,
+    _nextVoteState,
     _buildVoteContainer
 } = korVote;
 
@@ -90,6 +91,20 @@ describe('_activeKind', () => {
         expect(_activeKind(null)).toBeNull();
         expect(_activeKind(undefined)).toBeNull();
         expect(_activeKind('MAYBE')).toBeNull();
+    });
+});
+
+describe('_nextVoteState', () => {
+    it('switches to the clicked button when it is not the active one', () => {
+        expect(_nextVoteState(null, 'KEEP')).toBe('KEEP');
+        expect(_nextVoteState(null, 'REMOVE')).toBe('REMOVE');
+        expect(_nextVoteState('REMOVE', 'KEEP')).toBe('KEEP');
+        expect(_nextVoteState('KEEP', 'REMOVE')).toBe('REMOVE');
+    });
+
+    it('clears the vote when the active button is clicked again', () => {
+        expect(_nextVoteState('KEEP', 'KEEP')).toBeNull();
+        expect(_nextVoteState('REMOVE', 'REMOVE')).toBeNull();
     });
 });
 

@@ -70,6 +70,12 @@
         return null;
     }
 
+    // Three-state toggle: clicking the inactive button switches to it; clicking the active one
+    // clears the vote. `current` is 'KEEP' | 'REMOVE' | null, `clicked` is 'KEEP' | 'REMOVE'.
+    function _nextVoteState(current, clicked) {
+        return current === clicked ? null : clicked;
+    }
+
     // Detached DOM: a <span class="kor-vote"> holding two <button> children styled like native
     // .detailButton entries. No click handler in this phase. The button matching the stored vote
     // (if any) gets kor-active.
@@ -116,6 +122,7 @@
         _voteTargetId: _voteTargetId,
         _escHtml: _escHtml,
         _activeKind: _activeKind,
+        _nextVoteState: _nextVoteState,
         _buildVoteContainer: _buildVoteContainer
     };
 
