@@ -61,9 +61,31 @@ public sealed class VoteControllerTests
     [InlineData(nameof(VoteController.GetScript))]
     [InlineData(nameof(VoteController.GetStylesheet))]
     [InlineData(nameof(VoteController.GetConfigScript))]
-    public void AssetEndpoints_AreAnonymous(string methodName)
+    [InlineData(nameof(VoteController.GetMeta))]
+    public void AnonymousEndpoints_AreAnonymous(string methodName)
     {
         Assert.NotNull(Method(methodName).GetCustomAttribute<AllowAnonymousAttribute>());
+    }
+
+    [Fact]
+    public void GetMeta_IsMappedToTheMetaRoute()
+    {
+        var httpGet = Method(nameof(VoteController.GetMeta)).GetCustomAttribute<HttpGetAttribute>();
+
+        Assert.NotNull(httpGet);
+        Assert.Equal("meta", httpGet!.Template);
+    }
+
+    [Fact]
+    public void GetMeta_WhenPluginInstanceUnavailable_DefaultsToEnabledTrue()
+    {
+        // Plugin.Instance is null in a unit-test run - GetMeta must fall back to enabled = true.
+        // The Enabled value itself (a static-singleton read) is covered by manual Test 6 (R5 clause).
+        var result = BuildController().GetMeta();
+
+        var ok = Assert.IsType<OkObjectResult>(result);
+        var enabled = ok.Value!.GetType().GetProperty("enabled")!.GetValue(ok.Value);
+        Assert.Equal(true, enabled);
     }
 
     [Fact]

@@ -119,6 +119,18 @@ public class VoteController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public ActionResult PurgeOrphans() => Wrap(() => Ok(new { removed = _voteService.PurgeOrphans() }));
 
+    /// <summary>
+    /// Reports whether the vote buttons should be injected into the web client. Anonymous - read by
+    /// the injected script before the user is known. When <c>enabled</c> is false the script stays
+    /// dormant (no observer, no buttons); the rest of the API keeps working.
+    /// </summary>
+    /// <returns>An object with a boolean <c>enabled</c>.</returns>
+    [HttpGet("meta")]
+    [AllowAnonymous]
+    [Produces("application/json")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public ActionResult GetMeta() => Ok(new { enabled = Plugin.Instance?.Configuration.Enabled ?? true });
+
     /// <summary>Serves the embedded vote-button script.</summary>
     /// <returns>The JavaScript file.</returns>
     [HttpGet("kor-vote.js")]
