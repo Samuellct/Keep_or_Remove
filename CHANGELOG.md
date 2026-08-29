@@ -1,3 +1,10 @@
+## [0.2.0](https://github.com/Samuellct/Keep_or_Remove/compare/v0.1.0...v0.2.0) (2026-08-29)
+
+### Features
+
+* add the vote state transition helper ([729fa29](https://github.com/Samuellct/Keep_or_Remove/commit/729fa29460ced744d245cc2a7eb91498d32237d3))
+* cast, change and clear votes from the detail page ([07f77dd](https://github.com/Samuellct/Keep_or_Remove/commit/07f77dde7f5f5638015657caab63d1de12b6133e))
+
 ## [0.1.0](https://github.com/Samuellct/Keep_or_Remove/compare/v0.0.2...v0.1.0) (2026-08-29)
 
 ### Features

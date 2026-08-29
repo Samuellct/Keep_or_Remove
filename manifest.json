@@ -9,6 +9,14 @@
         "imageUrl": "https://raw.githubusercontent.com/Samuellct/Keep_or_Remove/main/docs/icon.png",
         "versions": [
             {
+                "version": "0.2.0.0",
+                "changelog": "### Features\n\n* add the vote state transition helper ([729fa29](https://github.com/Samuellct/Keep_or_Remove/commit/729fa29460ced744d245cc2a7eb91498d32237d3))\n* cast, change and clear votes from the detail page ([07f77dd](https://github.com/Samuellct/Keep_or_Remove/commit/07f77dde7f5f5638015657caab63d1de12b6133e))",
+                "targetAbi": "10.11.11.0",
+                "sourceUrl": "https://github.com/Samuellct/Keep_or_Remove/releases/download/v0.2.0/keep-or-remove_0.2.0.0.zip",
+                "checksum": "cf97debff1106209dc58deb53d9bf63c",
+                "timestamp": "2026-08-29T16:50:26Z"
+            },
+            {
                 "version": "0.1.0.0",
                 "changelog": "### Features\n\n* honour the plugin enabled toggle in the web client ([d909ef4](https://github.com/Samuellct/Keep_or_Remove/commit/d909ef44205dea9f944ad59019cf4fe8213f758c))\n* render the keep and remove buttons on the detail page ([2ecb8bd](https://github.com/Samuellct/Keep_or_Remove/commit/2ecb8bda6ffcc42700c54f4acd769e4319fa6827))",
                 "targetAbi": "10.11.11.0",
