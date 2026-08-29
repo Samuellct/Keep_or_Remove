@@ -9,6 +9,14 @@
         "imageUrl": "https://raw.githubusercontent.com/Samuellct/Keep_or_Remove/main/docs/icon.png",
         "versions": [
             {
+                "version": "0.1.0.0",
+                "changelog": "### Features\n\n* honour the plugin enabled toggle in the web client ([d909ef4](https://github.com/Samuellct/Keep_or_Remove/commit/d909ef44205dea9f944ad59019cf4fe8213f758c))\n* render the keep and remove buttons on the detail page ([2ecb8bd](https://github.com/Samuellct/Keep_or_Remove/commit/2ecb8bda6ffcc42700c54f4acd769e4319fa6827))",
+                "targetAbi": "10.11.11.0",
+                "sourceUrl": "https://github.com/Samuellct/Keep_or_Remove/releases/download/v0.1.0/keep-or-remove_0.1.0.0.zip",
+                "checksum": "32dcf7515eb3c94bccfcd2efbba7ca46",
+                "timestamp": "2026-08-29T12:20:19Z"
+            },
+            {
                 "version": "0.0.2.0",
                 "changelog": "### Bug Fixes\n\n* reject vote payloads outside the two allowed values ([a8435f6](https://github.com/Samuellct/Keep_or_Remove/commit/a8435f6ce607c0c51e4e9baa8b90c7b4fe32e784))\n* return 503 when vote storage cannot be read ([11caec5](https://github.com/Samuellct/Keep_or_Remove/commit/11caec59761c5588c181b2b8c951393574505c48))",
                 "targetAbi": "10.11.11.0",
