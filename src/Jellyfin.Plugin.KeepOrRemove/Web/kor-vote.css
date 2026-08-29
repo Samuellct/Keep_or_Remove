@@ -29,3 +29,22 @@
 .kor-vote-remove.kor-active .material-icons {
     color: var(--jf-palette-error-main, #c62828);
 }
+
+/* While a vote write is in flight: both buttons are dimmed and inert. */
+.kor-vote.kor-busy .kor-vote-button {
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+/* Brief confirmation once the server has accepted the write. Scale only, no colour. */
+@media (prefers-reduced-motion: no-preference) {
+    @keyframes kor-pulse {
+        0% { transform: scale(1); }
+        45% { transform: scale(1.25); }
+        100% { transform: scale(1); }
+    }
+
+    .kor-vote-button.kor-saved .material-icons {
+        animation: kor-pulse 400ms ease-out;
+    }
+}
