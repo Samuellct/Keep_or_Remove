@@ -1,39 +1,31 @@
-/* Keep or Remove - vote button styling. All classes prefixed kor-; colours from native Jellyfin vars. */
+/*
+ * Keep or Remove - vote button styling.
+ * Layout is inherited from Jellyfin's native .detailButton (flex column, centred icon); the kor-
+ * classes only dim the idle icon and tint it for the active vote.
+ */
 
 .kor-vote {
     display: inline-flex;
-    gap: 0.5em;
     align-items: center;
 }
 
-.kor-vote-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35em;
-    background: transparent;
-    border: 1px solid var(--primaryTextColor, currentColor);
-    border-radius: 999px;
-    color: var(--primaryTextColor, currentColor);
-    padding: 0.35em 0.9em;
-    cursor: pointer;
-    opacity: 0.75;
+.kor-vote-button .material-icons {
+    opacity: 0.72;
 }
 
-.kor-vote-button:hover {
+.kor-vote-button:hover .material-icons,
+.kor-vote-button:focus-visible .material-icons {
     opacity: 1;
 }
 
-.kor-vote-button.kor-active {
+.kor-vote-button.kor-active .material-icons {
     opacity: 1;
-    font-weight: 600;
 }
 
-.kor-vote-keep.kor-active {
-    border-color: var(--jf-palette-success-main, #66bb6a);
+.kor-vote-keep.kor-active .material-icons {
     color: var(--jf-palette-success-main, #66bb6a);
 }
 
-.kor-vote-remove.kor-active {
-    border-color: var(--jf-palette-error-main, #c62828);
+.kor-vote-remove.kor-active .material-icons {
     color: var(--jf-palette-error-main, #c62828);
 }
