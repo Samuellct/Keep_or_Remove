@@ -7,6 +7,15 @@
         "owner": "Samuellct",
         "category": "General",
         "imageUrl": "https://raw.githubusercontent.com/Samuellct/Keep_or_Remove/main/docs/icon.png",
-        "versions": []
+        "versions": [
+            {
+                "version": "0.0.2.0",
+                "changelog": "### Bug Fixes\n\n* reject vote payloads outside the two allowed values ([a8435f6](https://github.com/Samuellct/Keep_or_Remove/commit/a8435f6ce607c0c51e4e9baa8b90c7b4fe32e784))\n* return 503 when vote storage cannot be read ([11caec5](https://github.com/Samuellct/Keep_or_Remove/commit/11caec59761c5588c181b2b8c951393574505c48))",
+                "targetAbi": "10.11.11.0",
+                "sourceUrl": "https://github.com/Samuellct/Keep_or_Remove/releases/download/v0.0.2/keep-or-remove_0.0.2.0.zip",
+                "checksum": "acb82dba21b233c43bf48f4cc75bcede",
+                "timestamp": "2026-08-29T11:07:13Z"
+            }
+        ]
     }
 ]
