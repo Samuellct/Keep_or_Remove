@@ -1,7 +1,15 @@
 import { describe, it, expect } from 'vitest';
 import korVote from '../src/Jellyfin.Plugin.KeepOrRemove/Web/kor-vote.js';
 
-const { _isDetailPage, _detailItemId, _isSupportedType, _voteTargetId, _escHtml } = korVote;
+const {
+    _isDetailPage,
+    _detailItemId,
+    _isSupportedType,
+    _voteTargetId,
+    _escHtml,
+    _activeKind,
+    _buildVoteContainer
+} = korVote;
 
 describe('_isDetailPage', () => {
     it('is true for a details route', () => {
@@ -69,5 +77,72 @@ describe('_voteTargetId', () => {
 describe('_escHtml', () => {
     it('escapes HTML special characters', () => {
         expect(_escHtml('<b>Tom & "Jerry"</b>')).toBe('&lt;b&gt;Tom &amp; &quot;Jerry&quot;&lt;/b&gt;');
+    });
+});
+
+describe('_activeKind', () => {
+    it('maps a stored vote to the button that should be highlighted', () => {
+        expect(_activeKind('KEEP')).toBe('keep');
+        expect(_activeKind('REMOVE')).toBe('remove');
+    });
+
+    it('returns null when there is no vote', () => {
+        expect(_activeKind(null)).toBeNull();
+        expect(_activeKind(undefined)).toBeNull();
+        expect(_activeKind('MAYBE')).toBeNull();
+    });
+});
+
+describe('_buildVoteContainer', () => {
+    it('builds a detached span with two emby-button children', () => {
+        const el = _buildVoteContainer(null);
+
+        expect(el.tagName).toBe('SPAN');
+        expect(el.className).toBe('kor-vote');
+        expect(el.isConnected).toBe(false);
+
+        const buttons = el.querySelectorAll('button');
+        expect(buttons).toHaveLength(2);
+        buttons.forEach((b) => {
+            expect(b.getAttribute('is')).toBe('emby-button');
+            expect(b.type).toBe('button');
+            expect(b.className).toContain('button-flat detailButton emby-button kor-vote-button');
+        });
+        expect(el.querySelector('.kor-vote-keep .material-icons.thumb_up')).not.toBeNull();
+        expect(el.querySelector('.kor-vote-remove .material-icons.thumb_down')).not.toBeNull();
+    });
+
+    it('highlights only the keep button for a KEEP vote', () => {
+        const el = _buildVoteContainer('KEEP');
+        expect(el.querySelector('.kor-vote-keep').classList.contains('kor-active')).toBe(true);
+        expect(el.querySelector('.kor-vote-remove').classList.contains('kor-active')).toBe(false);
+    });
+
+    it('highlights only the remove button for a REMOVE vote', () => {
+        const el = _buildVoteContainer('REMOVE');
+        expect(el.querySelector('.kor-vote-remove').classList.contains('kor-active')).toBe(true);
+        expect(el.querySelector('.kor-vote-keep').classList.contains('kor-active')).toBe(false);
+    });
+
+    it('highlights neither button when there is no vote', () => {
+        const el = _buildVoteContainer(null);
+        expect(el.querySelectorAll('.kor-active')).toHaveLength(0);
+    });
+
+    it('binds no click handler in this phase', () => {
+        const el = _buildVoteContainer('KEEP');
+        // jsdom does not expose listeners directly; assert the buttons carry no inline handler and
+        // that the builder never references addEventListener (interaction lands in Phase 4).
+        el.querySelectorAll('button').forEach((b) => expect(b.onclick).toBeNull());
+    });
+});
+
+// The browser section (bootstrap / MutationObserver / _tick) must not run under jsdom: the module
+// returns right after `module.exports`, so importing it has no side effects.
+describe('module import', () => {
+    it('exports only the pure helpers and starts nothing', () => {
+        expect(typeof korVote._isDetailPage).toBe('function');
+        expect(korVote._bootstrap).toBeUndefined();
+        expect(korVote._tick).toBeUndefined();
     });
 });
