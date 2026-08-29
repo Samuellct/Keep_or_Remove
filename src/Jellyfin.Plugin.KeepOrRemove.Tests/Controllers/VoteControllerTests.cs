@@ -157,12 +157,18 @@ public sealed class VoteControllerTests
         Assert.IsType<BadRequestResult>(result);
     }
 
-    [Fact]
-    public async Task PutVote_WithAnUnknownWord_ReturnsBadRequest()
+    [Theory]
+    [InlineData("MAYBE")]   // unknown word
+    [InlineData("99")]      // numeric, out of the enum range - Enum.TryParse would accept this
+    [InlineData("1")]       // numeric, in range - Enum.TryParse would accept this as Remove
+    [InlineData("0")]
+    [InlineData("")]
+    [InlineData("   ")]
+    public async Task PutVote_WithAnythingOtherThanTheTwoAllowedValues_ReturnsBadRequest(string vote)
     {
         var controller = BuildController();
 
-        var result = await controller.PutVote(new VoteRequest { ItemId = Guid.NewGuid(), Vote = "MAYBE" });
+        var result = await controller.PutVote(new VoteRequest { ItemId = Guid.NewGuid(), Vote = vote });
 
         Assert.IsType<BadRequestResult>(result);
     }

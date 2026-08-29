@@ -61,13 +61,14 @@ public class VoteController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> PutVote([FromBody] VoteRequest request)
     {
-        if (request is null || !Enum.TryParse<VoteChoice>(request.Vote, ignoreCase: true, out var choice))
+        var choice = ParseVote(request?.Vote);
+        if (choice is null)
         {
             return BadRequest();
         }
 
         var userId = await CurrentUserIdAsync().ConfigureAwait(false);
-        return Wrap(() => _voteService.UpsertVote(userId, request.ItemId, choice) ? NoContent() : NotFound());
+        return Wrap(() => _voteService.UpsertVote(userId, request!.ItemId, choice.Value) ? NoContent() : NotFound());
     }
 
     /// <summary>Removes the current user's vote for an item.</summary>
@@ -138,6 +139,19 @@ public class VoteController : ControllerBase
     [AllowAnonymous]
     [Produces("application/javascript")]
     public IActionResult GetConfigScript() => Asset("config.js", "application/javascript");
+
+    /// <summary>
+    /// Parses the vote payload strictly against the two allowed values. Anything else - an unknown
+    /// word, a numeric string (<see cref="Enum.TryParse{TEnum}(string, bool, out TEnum)"/> would
+    /// accept "1" or "99" and yield an out-of-range <see cref="VoteChoice"/> that then corrupts
+    /// votes.json), null, empty, or whitespace - returns null and the caller answers 400.
+    /// </summary>
+    private static VoteChoice? ParseVote(string? raw) => raw?.Trim().ToUpperInvariant() switch
+    {
+        "KEEP" => VoteChoice.Keep,
+        "REMOVE" => VoteChoice.Remove,
+        _ => null
+    };
 
     private async Task<Guid> CurrentUserIdAsync()
     {
