@@ -16,29 +16,34 @@
     var SUPPORTED_TYPES = ['Movie', 'Series', 'Season', 'Episode'];
     var voteCache = new Map(); // targetItemId -> 'KEEP' | 'REMOVE' | null
 
+    // Anchored: only the item-detail route, not a library listing that happens to contain "details".
     function _isDetailPage(hash) {
-        return typeof hash === 'string' && hash.indexOf('/details') !== -1;
+        return /^#\/details([/?]|$)/i.test(hash || '');
     }
 
+    // Jellyfin item ids are 32-hex (no dashes) in the URL; the older 36-char dashed form is also
+    // accepted. "&serverId=" does not false-match because [#&?] must sit right before "id=".
     function _detailItemId(hash) {
         if (typeof hash !== 'string') {
             return null;
         }
-        var m = hash.match(/[?&]id=([^&]+)/);
-        return m ? decodeURIComponent(m[1]) : null;
+        var m = /[#&?]id=([a-f0-9-]+)/i.exec(hash);
+        return m ? m[1] : null;
     }
 
     function _isSupportedType(item) {
         return !!item && SUPPORTED_TYPES.indexOf(item.Type) !== -1;
     }
 
-    // The id the vote belongs to: the series for a season/episode, else the item itself.
+    // The id the vote belongs to: the parent series for a season/episode (getItem returns SeriesId
+    // on those DTOs), else the item itself. Falls back to the item's own id so a supported item
+    // never yields null - the backend resolves either way (VoteService.ResolveVoteTargetId).
     function _voteTargetId(item) {
         if (!item) {
             return null;
         }
         if (item.Type === 'Season' || item.Type === 'Episode') {
-            return item.SeriesId || null;
+            return item.SeriesId || item.Id || null;
         }
         return item.Id || null;
     }
