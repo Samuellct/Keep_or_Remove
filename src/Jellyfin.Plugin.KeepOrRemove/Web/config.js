@@ -102,6 +102,22 @@
             });
     }
 
+    function _loadWarning() {
+        return window.ApiClient.getPluginConfiguration(PLUGIN_ID).then(function (config) {
+            var warning = config && config.StartupWarning;
+            var banner = _el('korWarningBanner');
+            var text = _el('korWarningText');
+            if (warning) {
+                text.textContent = warning; // textContent, never innerHTML - the string is server-set
+                banner.style.display = '';
+            } else {
+                banner.style.display = 'none';
+            }
+        }).catch(function (err) {
+            console.error('[KeepOrRemove Config] could not read the plugin configuration:', err);
+        });
+    }
+
     function _onPurge() {
         var button = _el('korPurge');
         button.disabled = true;
@@ -123,6 +139,7 @@
     }
 
     function _onShow() {
+        _loadWarning();
         _loadResults();
     }
 
