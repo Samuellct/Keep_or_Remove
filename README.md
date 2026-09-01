@@ -22,7 +22,8 @@ Part of the [JellyUX](https://github.com/Samuellct/JellyUX-Homepage) plugin fami
 
 - **Jellyfin 10.11.11** (not tested against other versions - this plugin targets that release only).
 - **[File Transformation plugin](https://github.com/IAmParadox27/jellyfin-plugin-file-transformation)**
-  - required, used to inject the vote buttons into the web client.
+  - required, used to inject the vote buttons into the web client. If it is missing, the plugin's
+  API still works and the config page shows a warning, but no buttons appear.
 
 ## Installation
 
@@ -35,15 +36,46 @@ Part of the [JellyUX](https://github.com/Samuellct/JellyUX-Homepage) plugin fami
 
 ## Usage
 
-- On any movie or series page, users see two buttons: **Keep** and **Remove**. One vote per user per
-  title; clicking the other choice replaces it. Season and episode pages vote for the parent series.
-- The admin sees the aggregated results (Media / Keep / Remove / Total, sortable and filterable) on
-  **Administration > Plugins > Keep or Remove**.
+- On any movie or series page, users see two buttons: **Keep** (green thumb up) and **Remove**
+  (red thumb down). One vote per user per title. Clicking the other choice replaces the vote;
+  clicking the active choice again clears it. Season and episode pages vote for the parent series.
+- The admin sees the aggregated results on **Administration > Plugins > Keep or Remove**:
+  a `Media / Type / Keep / Remove / Total` table, sortable by keep or remove count and filterable
+  by media type, plus a **Purge orphan votes** button that drops votes whose media no longer exists.
+- Other users' votes are never shown on media pages - only the admin table aggregates them.
+
+## Compatibility
+
+The vote buttons are a **web-client** feature. On other clients (mobile apps, TV, Jellyfin Media
+Player) the native media UI is shown unchanged and voting is simply unavailable there; the admin
+table lives in the web dashboard. Nothing in the plugin depends on the client platform, so a mixed
+household is fine.
+
+## Tested alongside
+
+Keep or Remove is designed to coexist with the other plugins that customise the Jellyfin web
+client. It has been run together with all of the following on the same server without conflict -
+each patches `index.html` independently and the injected tags sit side by side:
+
+- **[File Transformation](https://github.com/IAmParadox27/jellyfin-plugin-file-transformation)** by IAmParadox27 (the injection mechanism this plugin relies on)
+- **[Media Bar](https://github.com/IAmParadox27/jellyfin-plugin-media-bar)** by IAmParadox27
+- **[Jellyfin Enhanced](https://github.com/n00bcodr/Jellyfin-Enhanced)**
+- **[Intro Skipper](https://github.com/intro-skipper/intro-skipper)**
+
+If an expected anchor in the page is missing, the plugin skips its own injection silently rather
+than risk breaking the web client.
 
 ## Clean removal
 
-All data lives in one directory: `<jellyfin-data>/Jellyfin.Plugin.KeepOrRemove/`. Uninstall the
-plugin and delete that directory - the server is left exactly as it was.
+All persistent data lives in **one directory**:
+`<jellyfin-data>/Jellyfin.Plugin.KeepOrRemove/` (it holds a single `votes.json`). To remove the
+plugin with zero residue:
+
+1. **Administration > Plugins > Keep or Remove > Uninstall**, then restart Jellyfin.
+2. Delete `<jellyfin-data>/Jellyfin.Plugin.KeepOrRemove/`.
+
+The server is then left exactly as it was. The plugin creates no database tables, no scheduled
+tasks, and no files anywhere else.
 
 ## Development
 
