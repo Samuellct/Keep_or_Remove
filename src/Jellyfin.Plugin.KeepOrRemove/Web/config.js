@@ -34,9 +34,15 @@
             + '</tr>';
     }
 
+    // Toast text after a purge. Kept pure so the wording is unit-tested without a browser.
+    function _purgeMessage(count) {
+        return count + ' orphan vote(s) removed.';
+    }
+
     var api = {
         _escHtml: _escHtml,
         _buildRow: _buildRow,
+        _purgeMessage: _purgeMessage,
         PLUGIN_ID: PLUGIN_ID
     };
 
@@ -96,6 +102,26 @@
             });
     }
 
+    function _onPurge() {
+        var button = _el('korPurge');
+        button.disabled = true;
+        window.ApiClient.ajax({
+            type: 'POST',
+            url: window.ApiClient.getUrl('KeepOrRemove/admin/purge'),
+            dataType: 'json'
+        }).then(function (result) {
+            var removed = (result && result.removed) || 0;
+            if (window.Dashboard && window.Dashboard.alert) {
+                window.Dashboard.alert(_purgeMessage(removed));
+            }
+            return _loadResults();
+        }).catch(function (err) {
+            console.error('[KeepOrRemove Config] purge failed:', err);
+        }).then(function () {
+            button.disabled = false;
+        });
+    }
+
     function _onShow() {
         _loadResults();
     }
@@ -109,6 +135,7 @@
         // The selects start at total / all in the markup; re-query on every change.
         _el('korSort').addEventListener('change', _loadResults);
         _el('korType').addEventListener('change', _loadResults);
+        _el('korPurge').addEventListener('click', _onPurge);
     }
 
     _bind();
