@@ -1,3 +1,12 @@
+## [0.3.0](https://github.com/Samuellct/Keep_or_Remove/compare/v0.2.0...v0.3.0) (2026-09-01)
+
+### Features
+
+* add sort and type filter controls to the admin table ([287126f](https://github.com/Samuellct/Keep_or_Remove/commit/287126f5a13094d73a5a0a27ed06f8182c0517b4))
+* render the aggregated results table on the config page ([fc94885](https://github.com/Samuellct/Keep_or_Remove/commit/fc94885e460e40bab50907860ddcc56bedde14f9))
+* surface the startup warning on the config page ([c6a4ec0](https://github.com/Samuellct/Keep_or_Remove/commit/c6a4ec04729e13dad0a03d66643bad7a7ed6a491))
+* wire the orphan vote purge button ([f9c3dc9](https://github.com/Samuellct/Keep_or_Remove/commit/f9c3dc97cff03dbf4f18de5c833f7b9740d68bb5))
+
 ## [0.2.0](https://github.com/Samuellct/Keep_or_Remove/compare/v0.1.0...v0.2.0) (2026-08-29)
 
 ### Features
