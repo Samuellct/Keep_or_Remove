@@ -1,7 +1,11 @@
 /*
  * Keep or Remove - admin config page.
- * Read-only aggregated results table with sort + type filter, plus a "purge orphans" button.
- * Pure helpers are exported for vitest; the DOM wiring runs only in a browser.
+ * Read-only aggregated results table with sort + type filter, plus a "purge orphans" button, and
+ * the startup-warning banner. The admin endpoints were built and proven in Phase 2; this file only
+ * wires the existing markup to them.
+ *
+ * Pure helpers are exported for Vitest; the browser section (after the export) never runs under
+ * jsdom because `module` is defined there and the IIFE returns immediately.
  */
 
 (function () {
@@ -38,14 +42,71 @@
 
     if (typeof module !== 'undefined' && module.exports) {
         module.exports = api;
+        return;
     }
 
     if (typeof document === 'undefined' || typeof window === 'undefined' || !window.ApiClient) {
         return;
     }
 
-    // TODO (PLAN.md Phase 5): on pageshow, read the sort/type selects, call
-    // GET /KeepOrRemove/admin/results, render rows via _buildRow, wire the purge button to
-    // POST /KeepOrRemove/admin/purge, and bind the StartupWarning banner from plugin config.
-    void PLUGIN_ID;
+    // ---------------------------------------------------------------------------
+    // Browser section - runs only on the real plugin config page.
+    // ---------------------------------------------------------------------------
+
+    function _el(id) {
+        return document.getElementById(id);
+    }
+
+    function _query() {
+        return {
+            sort: _el('korSort').value,
+            type: _el('korType').value
+        };
+    }
+
+    function _renderRows(rows) {
+        var body = _el('korResultsBody');
+        var table = _el('korResultsTable');
+        var empty = _el('korEmpty');
+
+        if (!rows || !rows.length) {
+            body.innerHTML = '';
+            table.style.display = 'none';
+            empty.style.display = '';
+            return;
+        }
+
+        body.innerHTML = rows.map(_buildRow).join('');
+        table.style.display = '';
+        empty.style.display = 'none';
+    }
+
+    function _loadResults() {
+        window.Dashboard.showLoadingMsg();
+        return window.ApiClient.getJSON(window.ApiClient.getUrl('KeepOrRemove/admin/results', _query()))
+            .then(function (rows) {
+                _renderRows(rows);
+            })
+            .catch(function (err) {
+                console.error('[KeepOrRemove Config] could not load the results:', err);
+                _renderRows([]);
+            })
+            .then(function () {
+                window.Dashboard.hideLoadingMsg();
+            });
+    }
+
+    function _onShow() {
+        _loadResults();
+    }
+
+    function _bind() {
+        var page = _el('keepOrRemoveConfigPage');
+        if (!page) {
+            return;
+        }
+        page.addEventListener('pageshow', _onShow);
+    }
+
+    _bind();
 })();
