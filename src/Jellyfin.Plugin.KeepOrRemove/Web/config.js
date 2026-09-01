@@ -106,6 +106,9 @@
             return;
         }
         page.addEventListener('pageshow', _onShow);
+        // The selects start at total / all in the markup; re-query on every change.
+        _el('korSort').addEventListener('change', _loadResults);
+        _el('korType').addEventListener('change', _loadResults);
     }
 
     _bind();
