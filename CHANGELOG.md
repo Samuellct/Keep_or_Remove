@@ -1,3 +1,9 @@
+## [1.0.2](https://github.com/JellyUX/Keep_or_Remove/compare/v1.0.1...v1.0.2) (2026-09-02)
+
+### Bug Fixes
+
+* let the detail-page action row wrap on narrow viewports ([6b43819](https://github.com/JellyUX/Keep_or_Remove/commit/6b4381925abf43e9097a476e95a793f23dda2f00))
+
 ## [1.0.1](https://github.com/JellyUX/Keep_or_Remove/compare/v1.0.0...v1.0.1) (2026-09-02)
 
 ### Bug Fixes
