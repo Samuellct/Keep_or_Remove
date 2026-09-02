@@ -4,6 +4,17 @@
  * classes only dim the idle icon and tint it for the active vote.
  */
 
+/*
+ * The detail-page action row (.mainDetailButtons) is flex / nowrap and the page body is
+ * overflow-x: hidden, so the row is silently clipped on the right when it is wider than the
+ * viewport. Adding two buttons tips it over on phone-width screens (the Remove button and the
+ * overflow menu disappear, reachable only in landscape). Letting the row wrap keeps every control
+ * visible; on wide screens it stays a single line, so this is a no-op there.
+ */
+.mainDetailButtons {
+    flex-wrap: wrap;
+}
+
 .kor-vote {
     display: inline-flex;
     align-items: center;
