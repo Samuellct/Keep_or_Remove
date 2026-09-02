@@ -42,6 +42,7 @@ public class VoteController : ControllerBase
     [HttpGet("vote")]
     [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
     public async Task<ActionResult> GetVote([FromQuery] Guid itemId)
     {
         var userId = await CurrentUserIdAsync().ConfigureAwait(false);
@@ -54,11 +55,16 @@ public class VoteController : ControllerBase
 
     /// <summary>Creates or updates the current user's vote for an item.</summary>
     /// <param name="request">The vote request.</param>
-    /// <returns>204 on success, 404 when the item cannot be resolved.</returns>
+    /// <returns>
+    /// 204 on success; 400 when the vote value is not "KEEP" or "REMOVE"; 404 when the item cannot
+    /// be resolved to a Movie or Series; 503 when vote storage is unavailable.
+    /// </returns>
     [HttpPut("vote")]
     [Authorize]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
     public async Task<ActionResult> PutVote([FromBody] VoteRequest request)
     {
         var choice = ParseVote(request?.Vote);
@@ -73,10 +79,11 @@ public class VoteController : ControllerBase
 
     /// <summary>Removes the current user's vote for an item.</summary>
     /// <param name="itemId">The media item id.</param>
-    /// <returns>204 always (idempotent).</returns>
+    /// <returns>204 always (idempotent); 503 when vote storage is unavailable.</returns>
     [HttpDelete("vote")]
     [Authorize]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
     public async Task<ActionResult> DeleteVote([FromQuery] Guid itemId)
     {
         var userId = await CurrentUserIdAsync().ConfigureAwait(false);
@@ -94,6 +101,7 @@ public class VoteController : ControllerBase
     [HttpGet("admin/results")]
     [Authorize(Policy = Policies.RequiresElevation)]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
     public ActionResult GetResults([FromQuery] string? sort, [FromQuery] string? type)
     {
         var sortValue = Enum.TryParse<ResultSort>(sort, ignoreCase: true, out var s) ? s : ResultSort.Total;
@@ -117,6 +125,7 @@ public class VoteController : ControllerBase
     [HttpPost("admin/purge")]
     [Authorize(Policy = Policies.RequiresElevation)]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
     public ActionResult PurgeOrphans() => Wrap(() => Ok(new { removed = _voteService.PurgeOrphans() }));
 
     /// <summary>
@@ -136,6 +145,8 @@ public class VoteController : ControllerBase
     [HttpGet("kor-vote.js")]
     [AllowAnonymous]
     [Produces("application/javascript")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult GetScript() => Asset("kor-vote.js", "application/javascript");
 
     /// <summary>Serves the embedded vote-button stylesheet.</summary>
@@ -143,6 +154,8 @@ public class VoteController : ControllerBase
     [HttpGet("kor-vote.css")]
     [AllowAnonymous]
     [Produces("text/css")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult GetStylesheet() => Asset("kor-vote.css", "text/css");
 
     /// <summary>Serves the embedded admin config-page script.</summary>
@@ -150,6 +163,8 @@ public class VoteController : ControllerBase
     [HttpGet("config.js")]
     [AllowAnonymous]
     [Produces("application/javascript")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult GetConfigScript() => Asset("config.js", "application/javascript");
 
     /// <summary>
