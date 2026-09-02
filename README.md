@@ -44,6 +44,12 @@ Part of the [JellyUX](https://github.com/Samuellct/JellyUX-Homepage) plugin fami
   by media type, plus a **Purge orphan votes** button that drops votes whose media no longer exists.
 - Other users' votes are never shown on media pages - only the admin table aggregates them.
 
+## Screenshots
+
+![Keep and Remove buttons on a movie detail page](docs/screenshots/detail-buttons.jpg)
+
+![Aggregated results on the plugin configuration page](docs/screenshots/admin-panel.png)
+
 ## Compatibility
 
 The vote buttons are a **web-client** feature. On other clients (mobile apps, TV, Jellyfin Media
