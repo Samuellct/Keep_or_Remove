@@ -9,6 +9,14 @@
         "imageUrl": "https://raw.githubusercontent.com/Samuellct/Keep_or_Remove/main/docs/icon.png",
         "versions": [
             {
+                "version": "1.0.0.0",
+                "changelog": "### ⚠ BREAKING CHANGES\n\n* First stable release. The HTTP API under /KeepOrRemove\nand the votes.json schema (schema: 1) are now covered by SemVer; any\nincompatible change bumps the major version.\n\n### Features\n\n* stabilise the public HTTP API and votes.json schema for 1.0.0 ([cbfd6c4](https://github.com/Samuellct/Keep_or_Remove/commit/cbfd6c4cf19bfac3fbc93c7a651a685552c177bf))",
+                "targetAbi": "10.11.11.0",
+                "sourceUrl": "https://github.com/Samuellct/Keep_or_Remove/releases/download/v1.0.0/keep-or-remove_1.0.0.0.zip",
+                "checksum": "3da03b7ce4846859d0d483c009314363",
+                "timestamp": "2026-09-02T14:57:45Z"
+            },
+            {
                 "version": "0.3.0.0",
                 "changelog": "### Features\n\n* add sort and type filter controls to the admin table ([287126f](https://github.com/Samuellct/Keep_or_Remove/commit/287126f5a13094d73a5a0a27ed06f8182c0517b4))\n* render the aggregated results table on the config page ([fc94885](https://github.com/Samuellct/Keep_or_Remove/commit/fc94885e460e40bab50907860ddcc56bedde14f9))\n* surface the startup warning on the config page ([c6a4ec0](https://github.com/Samuellct/Keep_or_Remove/commit/c6a4ec04729e13dad0a03d66643bad7a7ed6a491))\n* wire the orphan vote purge button ([f9c3dc9](https://github.com/Samuellct/Keep_or_Remove/commit/f9c3dc97cff03dbf4f18de5c833f7b9740d68bb5))",
                 "targetAbi": "10.11.11.0",

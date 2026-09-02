@@ -1,3 +1,15 @@
+## [1.0.0](https://github.com/Samuellct/Keep_or_Remove/compare/v0.3.0...v1.0.0) (2026-09-02)
+
+### ⚠ BREAKING CHANGES
+
+* First stable release. The HTTP API under /KeepOrRemove
+and the votes.json schema (schema: 1) are now covered by SemVer; any
+incompatible change bumps the major version.
+
+### Features
+
+* stabilise the public HTTP API and votes.json schema for 1.0.0 ([cbfd6c4](https://github.com/Samuellct/Keep_or_Remove/commit/cbfd6c4cf19bfac3fbc93c7a651a685552c177bf))
+
 ## [0.3.0](https://github.com/Samuellct/Keep_or_Remove/compare/v0.2.0...v0.3.0) (2026-09-01)
 
 ### Features
