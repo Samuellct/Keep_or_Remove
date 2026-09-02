@@ -20,7 +20,7 @@ Part of the [JellyUX](https://github.com/Samuellct/JellyUX-Homepage) plugin fami
 
 ## Prerequisites
 
-- **Jellyfin 10.11.11** (not tested against other versions - this plugin targets that release only).
+- **Jellyfin 10.11.11**. Other versions may work but are not officially supported.
 - **[File Transformation plugin](https://github.com/IAmParadox27/jellyfin-plugin-file-transformation)**
   - required, used to inject the vote buttons into the web client. If it is missing, the plugin's
   API still works and the config page shows a warning, but no buttons appear.
