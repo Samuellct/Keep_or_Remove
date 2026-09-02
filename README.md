@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://github.com/JellyUX/Keep_or_Remove/actions/workflows/ci.yml/badge.svg" alt="Build">
   <img src="https://img.shields.io/github/v/release/JellyUX/Keep_or_Remove" alt="Version">
-  <img src="https://img.shields.io/badge/Jellyfin-10.11.11-orange" alt="Jellyfin">
+  <img src="https://img.shields.io/badge/Jellyfin-10.11.10%2B-orange" alt="Jellyfin">
   <img src="https://img.shields.io/badge/license-GPL--3.0-green" alt="License">
 </p>
 
@@ -17,7 +17,7 @@ Part of the [JellyUX](https://github.com/JellyUX) plugin family.
 
 ## Prerequisites
 
-- **Jellyfin 10.11.11**. Other versions may work but are not officially supported.
+- **Jellyfin 10.11.10 or newer** (10.11.x line). Older versions are not supported.
 - **[File Transformation plugin](https://github.com/IAmParadox27/jellyfin-plugin-file-transformation)**
   - required, used to inject the vote buttons into the web client. If it is missing, the plugin's config page shows a warning and no buttons appear.
 

@@ -2,7 +2,7 @@
 name: "Keep or Remove"
 guid: "dbcf4f1f-bc0c-4681-b79a-cbd2294b2538"
 version: "0.0.0.0"
-targetAbi: "10.11.11.0"
+targetAbi: "10.11.10.0"
 framework: "net9.0"
 owner: "Samuellct"
 overview: "Vote keep or remove on library media to help the admin decide what stays."
