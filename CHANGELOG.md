@@ -1,3 +1,9 @@
+## [1.0.1](https://github.com/JellyUX/Keep_or_Remove/compare/v1.0.0...v1.0.1) (2026-09-02)
+
+### Bug Fixes
+
+* lower the minimum Jellyfin version to 10.11.10 ([98c21d0](https://github.com/JellyUX/Keep_or_Remove/commit/98c21d008e9bab184aca8b2b2a84dff48b6e1d6d))
+
 ## [1.0.0](https://github.com/JellyUX/Keep_or_Remove/compare/v0.3.0...v1.0.0) (2026-09-02)
 
 ### ⚠ BREAKING CHANGES
