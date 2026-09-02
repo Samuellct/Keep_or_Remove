@@ -8,7 +8,7 @@
     <FileVersion>0.1.0.0</FileVersion>
     <Version>0.1.0.0</Version>
     <RootNamespace>Jellyfin.Plugin.KeepOrRemove</RootNamespace>
-    <RepositoryUrl>https://github.com/Samuellct/Keep_or_Remove</RepositoryUrl>
+    <RepositoryUrl>https://github.com/JellyUX/Keep_or_Remove</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>

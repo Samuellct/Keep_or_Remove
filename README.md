@@ -1,8 +1,8 @@
 # Keep or Remove
 
 <p align="center">
-  <img src="https://github.com/Samuellct/Keep_or_Remove/actions/workflows/ci.yml/badge.svg" alt="Build">
-  <img src="https://img.shields.io/github/v/release/Samuellct/Keep_or_Remove" alt="Version">
+  <img src="https://github.com/JellyUX/Keep_or_Remove/actions/workflows/ci.yml/badge.svg" alt="Build">
+  <img src="https://img.shields.io/github/v/release/JellyUX/Keep_or_Remove" alt="Version">
   <img src="https://img.shields.io/badge/Jellyfin-10.11.11-orange" alt="Jellyfin">
   <img src="https://img.shields.io/badge/license-GPL--3.0-green" alt="License">
 </p>
@@ -11,7 +11,7 @@ A small, **temporary** Jellyfin plugin. While server storage is limited, it lets
 
 The plugin is **decision-support only**. It never deletes, adds, moves, or modifies any media, metadata, or file. It never auto-rotates and never enforces a majority. The admin keeps full control.
 
-Part of the [JellyUX](https://github.com/Samuellct/JellyUX-Homepage) plugin family.
+Part of the [JellyUX](https://github.com/JellyUX) plugin family.
 
 ---
 
@@ -25,7 +25,7 @@ Part of the [JellyUX](https://github.com/Samuellct/JellyUX-Homepage) plugin fami
 
 1. Jellyfin dashboard: **Plugins > Repositories > Add**, paste:
    ```
-   https://raw.githubusercontent.com/Samuellct/Keep_or_Remove/main/manifest.json
+   https://raw.githubusercontent.com/JellyUX/Keep_or_Remove/main/manifest.json
    ```
 2. **Plugins > Catalog**, install **Keep or Remove**.
 3. Restart Jellyfin.

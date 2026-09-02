@@ -6,45 +6,45 @@
         "description": "A temporary decision-support plugin: each user votes keep or remove on movies and series; the admin gets an aggregated read-only view for manual library rotation. Never modifies the library.",
         "owner": "Samuellct",
         "category": "General",
-        "imageUrl": "https://raw.githubusercontent.com/Samuellct/Keep_or_Remove/main/docs/icon.png",
+        "imageUrl": "https://raw.githubusercontent.com/JellyUX/Keep_or_Remove/main/docs/icon.png",
         "versions": [
             {
                 "version": "1.0.0.0",
-                "changelog": "### ⚠ BREAKING CHANGES\n\n* First stable release. The HTTP API under /KeepOrRemove\nand the votes.json schema (schema: 1) are now covered by SemVer; any\nincompatible change bumps the major version.\n\n### Features\n\n* stabilise the public HTTP API and votes.json schema for 1.0.0 ([cbfd6c4](https://github.com/Samuellct/Keep_or_Remove/commit/cbfd6c4cf19bfac3fbc93c7a651a685552c177bf))",
+                "changelog": "### ⚠ BREAKING CHANGES\n\n* First stable release. The HTTP API under /KeepOrRemove\nand the votes.json schema (schema: 1) are now covered by SemVer; any\nincompatible change bumps the major version.\n\n### Features\n\n* stabilise the public HTTP API and votes.json schema for 1.0.0 ([cbfd6c4](https://github.com/JellyUX/Keep_or_Remove/commit/cbfd6c4cf19bfac3fbc93c7a651a685552c177bf))",
                 "targetAbi": "10.11.11.0",
-                "sourceUrl": "https://github.com/Samuellct/Keep_or_Remove/releases/download/v1.0.0/keep-or-remove_1.0.0.0.zip",
+                "sourceUrl": "https://github.com/JellyUX/Keep_or_Remove/releases/download/v1.0.0/keep-or-remove_1.0.0.0.zip",
                 "checksum": "3da03b7ce4846859d0d483c009314363",
                 "timestamp": "2026-09-02T14:57:45Z"
             },
             {
                 "version": "0.3.0.0",
-                "changelog": "### Features\n\n* add sort and type filter controls to the admin table ([287126f](https://github.com/Samuellct/Keep_or_Remove/commit/287126f5a13094d73a5a0a27ed06f8182c0517b4))\n* render the aggregated results table on the config page ([fc94885](https://github.com/Samuellct/Keep_or_Remove/commit/fc94885e460e40bab50907860ddcc56bedde14f9))\n* surface the startup warning on the config page ([c6a4ec0](https://github.com/Samuellct/Keep_or_Remove/commit/c6a4ec04729e13dad0a03d66643bad7a7ed6a491))\n* wire the orphan vote purge button ([f9c3dc9](https://github.com/Samuellct/Keep_or_Remove/commit/f9c3dc97cff03dbf4f18de5c833f7b9740d68bb5))",
+                "changelog": "### Features\n\n* add sort and type filter controls to the admin table ([287126f](https://github.com/JellyUX/Keep_or_Remove/commit/287126f5a13094d73a5a0a27ed06f8182c0517b4))\n* render the aggregated results table on the config page ([fc94885](https://github.com/JellyUX/Keep_or_Remove/commit/fc94885e460e40bab50907860ddcc56bedde14f9))\n* surface the startup warning on the config page ([c6a4ec0](https://github.com/JellyUX/Keep_or_Remove/commit/c6a4ec04729e13dad0a03d66643bad7a7ed6a491))\n* wire the orphan vote purge button ([f9c3dc9](https://github.com/JellyUX/Keep_or_Remove/commit/f9c3dc97cff03dbf4f18de5c833f7b9740d68bb5))",
                 "targetAbi": "10.11.11.0",
-                "sourceUrl": "https://github.com/Samuellct/Keep_or_Remove/releases/download/v0.3.0/keep-or-remove_0.3.0.0.zip",
+                "sourceUrl": "https://github.com/JellyUX/Keep_or_Remove/releases/download/v0.3.0/keep-or-remove_0.3.0.0.zip",
                 "checksum": "4b2ce94c412b7f3bd2a13aee5ec66425",
                 "timestamp": "2026-09-01T21:06:18Z"
             },
             {
                 "version": "0.2.0.0",
-                "changelog": "### Features\n\n* add the vote state transition helper ([729fa29](https://github.com/Samuellct/Keep_or_Remove/commit/729fa29460ced744d245cc2a7eb91498d32237d3))\n* cast, change and clear votes from the detail page ([07f77dd](https://github.com/Samuellct/Keep_or_Remove/commit/07f77dde7f5f5638015657caab63d1de12b6133e))",
+                "changelog": "### Features\n\n* add the vote state transition helper ([729fa29](https://github.com/JellyUX/Keep_or_Remove/commit/729fa29460ced744d245cc2a7eb91498d32237d3))\n* cast, change and clear votes from the detail page ([07f77dd](https://github.com/JellyUX/Keep_or_Remove/commit/07f77dde7f5f5638015657caab63d1de12b6133e))",
                 "targetAbi": "10.11.11.0",
-                "sourceUrl": "https://github.com/Samuellct/Keep_or_Remove/releases/download/v0.2.0/keep-or-remove_0.2.0.0.zip",
+                "sourceUrl": "https://github.com/JellyUX/Keep_or_Remove/releases/download/v0.2.0/keep-or-remove_0.2.0.0.zip",
                 "checksum": "cf97debff1106209dc58deb53d9bf63c",
                 "timestamp": "2026-08-29T16:50:26Z"
             },
             {
                 "version": "0.1.0.0",
-                "changelog": "### Features\n\n* honour the plugin enabled toggle in the web client ([d909ef4](https://github.com/Samuellct/Keep_or_Remove/commit/d909ef44205dea9f944ad59019cf4fe8213f758c))\n* render the keep and remove buttons on the detail page ([2ecb8bd](https://github.com/Samuellct/Keep_or_Remove/commit/2ecb8bda6ffcc42700c54f4acd769e4319fa6827))",
+                "changelog": "### Features\n\n* honour the plugin enabled toggle in the web client ([d909ef4](https://github.com/JellyUX/Keep_or_Remove/commit/d909ef44205dea9f944ad59019cf4fe8213f758c))\n* render the keep and remove buttons on the detail page ([2ecb8bd](https://github.com/JellyUX/Keep_or_Remove/commit/2ecb8bda6ffcc42700c54f4acd769e4319fa6827))",
                 "targetAbi": "10.11.11.0",
-                "sourceUrl": "https://github.com/Samuellct/Keep_or_Remove/releases/download/v0.1.0/keep-or-remove_0.1.0.0.zip",
+                "sourceUrl": "https://github.com/JellyUX/Keep_or_Remove/releases/download/v0.1.0/keep-or-remove_0.1.0.0.zip",
                 "checksum": "32dcf7515eb3c94bccfcd2efbba7ca46",
                 "timestamp": "2026-08-29T12:20:19Z"
             },
             {
                 "version": "0.0.2.0",
-                "changelog": "### Bug Fixes\n\n* reject vote payloads outside the two allowed values ([a8435f6](https://github.com/Samuellct/Keep_or_Remove/commit/a8435f6ce607c0c51e4e9baa8b90c7b4fe32e784))\n* return 503 when vote storage cannot be read ([11caec5](https://github.com/Samuellct/Keep_or_Remove/commit/11caec59761c5588c181b2b8c951393574505c48))",
+                "changelog": "### Bug Fixes\n\n* reject vote payloads outside the two allowed values ([a8435f6](https://github.com/JellyUX/Keep_or_Remove/commit/a8435f6ce607c0c51e4e9baa8b90c7b4fe32e784))\n* return 503 when vote storage cannot be read ([11caec5](https://github.com/JellyUX/Keep_or_Remove/commit/11caec59761c5588c181b2b8c951393574505c48))",
                 "targetAbi": "10.11.11.0",
-                "sourceUrl": "https://github.com/Samuellct/Keep_or_Remove/releases/download/v0.0.2/keep-or-remove_0.0.2.0.zip",
+                "sourceUrl": "https://github.com/JellyUX/Keep_or_Remove/releases/download/v0.0.2/keep-or-remove_0.0.2.0.zip",
                 "checksum": "acb82dba21b233c43bf48f4cc75bcede",
                 "timestamp": "2026-08-29T11:07:13Z"
             }
